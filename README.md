@@ -69,8 +69,8 @@ User Query → Embedding → Vector Search
 ## Roadmap
 
 - [x] PDF ingestion
-- [ ] Text / Markdown ingestion
-- [ ] API-based ingestion
+- [x] Text / Markdown ingestion
+- [x] API-based ingestion
 - [ ] Streaming responses
 - [ ] Metadata filtering
 - [ ] Caching & optimization
