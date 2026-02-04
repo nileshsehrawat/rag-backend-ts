@@ -1,13 +1,14 @@
-import { OpenAIEmbedding } from "../embeddings/openai.embedding";
+// import { OpenAIEmbedding } from "../embeddings/openai.embedding";
+import { OllamaEmbedding } from "../embeddings/ollama.embedding";
 import { chroma } from "../vector/chroma.client";
 import { chunkText } from "./chunker";
 
-
 const COLLECTION_NAME = "documents";
 
-export async function ingestText(text: string){
-  const embedding = new OpenAIEmbedding(process.env.OPENAI_API_KEY || "");
-  
+export async function ingestText(text: string) {
+  // const embedding = new OpenAIEmbedding(process.env.OPENAI_API_KEY || "");
+  const embedding = new OllamaEmbedding();
+
   const chunks = chunkText(text, 500, 50);
   const vectors = await embedding.embedMany(chunks);
 
@@ -16,7 +17,7 @@ export async function ingestText(text: string){
   });
 
   await collection.add({
-    ids: chunks.map((_,i)=> `chunk-${i}`),
+    ids: chunks.map((_, i) => `chunk-${i}`),
     documents: chunks,
     embeddings: vectors,
   });
